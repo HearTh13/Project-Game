@@ -15,6 +15,16 @@ public class DestTree extends interactives.InteractiveObject{
         
         down1 = setup("/interactives/Destructable_Tree", gp.tileSize, gp.tileSize);
         destructible = true;
+        health = 3;
+    }
+    
+    public void playSE(){
+        gp.playSE(28);
+    }
+    
+    public InteractiveObject getDestroyedForm(){
+        InteractiveObject object = new Trunk(gp, worldX/gp.tileSize, worldY/gp.tileSize);
+        return object;
     }
     
     public boolean isCorrectItem(Entity entity){

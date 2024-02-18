@@ -18,8 +18,23 @@ public class InteractiveObject extends Entity{
         return isCorrectItem;
     }
     
-    public void update(){
+    public void playSE(){
         
+    }
+    
+    public InteractiveObject getDestroyedForm(){
+        InteractiveObject object = null;
+        return object;
+    }
+    
+    public void update(){
+        if (invincible) {
+            invincibleCounter++;
+            if (invincibleCounter > 20) {
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
     }
     
 }

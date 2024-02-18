@@ -136,6 +136,7 @@ public class Entity {
         gp.cc.checkObject(this, false);
         gp.cc.checkEntity(this, gp.npc);
         gp.cc.checkEntity(this, gp.mon);
+        gp.cc.checkEntity(this, gp.iObject);
         boolean contactPlayer = gp.cc.checkPlayer(this);
         
         if (this.type == typeMonster && contactPlayer) {

@@ -323,8 +323,14 @@ public class Player extends Entity{
     
     public void damageIObject(int i){
         if (i != 999 && gp.iObject[gp.currentMap][i].destructible
-                && gp.iObject[gp.currentMap][i].isCorrectItem(this)) {
-            gp.iObject[gp.currentMap][i] = null;
+                && gp.iObject[gp.currentMap][i].isCorrectItem(this) 
+                && !gp.iObject[gp.currentMap][i].invincible) {
+            gp.iObject[gp.currentMap][i].playSE();
+            gp.iObject[gp.currentMap][i].health--;
+            gp.iObject[gp.currentMap][i].invincible = true;
+            if (gp.iObject[gp.currentMap][i].health <= 0) {
+                gp.iObject[gp.currentMap][i] = gp.iObject[gp.currentMap][i].getDestroyedForm();
+            }
         }
     }
     
