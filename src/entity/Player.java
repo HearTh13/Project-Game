@@ -177,6 +177,8 @@ public class Player extends Entity{
             int monIndex = gp.cc.checkEntity(this, gp.mon);
             contactMon(monIndex);
             
+            int iObjectIndex = gp.cc.checkEntity(this, gp.iObject);
+            
             //Check Event
             gp.event.checkEvent();
                         
@@ -304,6 +306,9 @@ public class Player extends Entity{
             int monsterIndex = gp.cc.checkEntity(this, gp.mon);
             damageMonster(monsterIndex, attack);
             
+            int iObjectIndex = gp.cc.checkEntity(this, gp.iObject);
+            damageIObject(iObjectIndex);
+            
             worldX = currentWorldX;
             worldY = currentWorldY;
             solidArea.width = solidAreaWidth;
@@ -315,6 +320,14 @@ public class Player extends Entity{
             attacking = false;
         }
     }
+    
+    public void damageIObject(int i){
+        if (i != 999 && gp.iObject[gp.currentMap][i].destructible
+                && gp.iObject[gp.currentMap][i].isCorrectItem(this)) {
+            gp.iObject[gp.currentMap][i] = null;
+        }
+    }
+    
     public void contactObject(int i){
         if (i != 999) {
             Entity object;

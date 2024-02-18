@@ -1,6 +1,7 @@
 package main;
 
 import entity.*;
+import interactives.DestTree;
 
 public class AssetSetter {
     
@@ -396,6 +397,12 @@ public class AssetSetter {
         gp.mon[map][i].worldX = gp.tileSize*44;
         gp.mon[map][i].worldY = gp.tileSize*41;
         i++;
+    }
+    
+    public void setInteractives(){
+        int map = 0;
+        int i = 0;
+        gp.iObject[map][i] = new DestTree(gp, 12, 3);
     }
     
 }

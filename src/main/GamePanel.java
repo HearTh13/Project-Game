@@ -3,6 +3,7 @@ package main;
 import event.Event;
 import inputs.KeyboardInputs;
 import entity.*;
+import interactives.InteractiveObject;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,7 +33,7 @@ public class GamePanel extends JPanel implements Runnable{
     int FPS = 60;
     
     //System
-    TileManager tile = new TileManager(this);
+    public TileManager tile = new TileManager(this);
     public KeyboardInputs key = new KeyboardInputs(this);
     Sound music = new Sound();
     Sound SE = new Sound();
@@ -44,6 +45,7 @@ public class GamePanel extends JPanel implements Runnable{
     
     //Entity and Object
     public Player player = new Player(this, key);
+    public InteractiveObject iObject[][] = new InteractiveObject[maxMap][50];
     public Entity[][] obj = new Entity[maxMap][250];
     public Entity[][] npc = new Entity[maxMap][20];
     public Entity[][] mon = new Entity[maxMap][20];
@@ -76,6 +78,7 @@ public class GamePanel extends JPanel implements Runnable{
         asset.setObject();
         asset.setNPC();
         asset.setMonster();
+        asset.setInteractives();
         playMusic(2);
         gameState = titleState;
         ui.scene = 0;
@@ -183,6 +186,12 @@ public class GamePanel extends JPanel implements Runnable{
                 }
             }
             
+            for (int i = 0; i < iObject[1].length; i++) {
+                if (iObject[currentMap][i] != null) {
+                    iObject[currentMap][i].update();
+                }
+            }
+            
         }
         else {
             //Nothing
@@ -207,6 +216,12 @@ public class GamePanel extends JPanel implements Runnable{
             
             //Tile
             tile.draw(g2);
+            
+            for (int i = 0; i < iObject[1].length; i++) {
+                if (iObject[currentMap][i] != null) {
+                    iObject[currentMap][i].draw(g2);
+                }
+            }
             
             //Add Entities to list
             entityList.add(player);
