@@ -37,28 +37,35 @@ public class NPC_Merchant extends Entity{
     }
     
     public void setAction(){
-        
-        actionLockCounter++;
-        
-        if (actionLockCounter == 120) {
-            Random random = new Random();
-            int i = random.nextInt(100)+1;
+        if (onPath) {
+            int goalCol = 13;
+            int goalRow = 3;
+            
+            searchPath(goalCol, goalRow);
+        }
+        else{
+            actionLockCounter++;
 
-            if (i <= 25) {
-                direction = "up";
+            if (actionLockCounter == 120) {
+                Random random = new Random();
+                int i = random.nextInt(100)+1;
+
+                if (i <= 25) {
+                    direction = "up";
+                }
+                else if (i > 25 && i <= 50) {
+                    direction = "down";
+                }
+                else if (i > 50 && i <= 75) {
+                    direction = "left";
+                }
+                else if (i > 75 && i <= 100) {
+                    direction = "right";
+                }
+
+                actionLockCounter = 0;
+
             }
-            else if (i > 25 && i <= 50) {
-                direction = "down";
-            }
-            else if (i > 50 && i <= 75) {
-                direction = "left";
-            }
-            else if (i > 75 && i <= 100) {
-                direction = "right";
-            }
-            
-            actionLockCounter = 0;
-            
         }
     }
     
@@ -66,6 +73,8 @@ public class NPC_Merchant extends Entity{
         super.speak();
         gp.gameState = gp.tradeState;
         gp.ui.npc = this;
+        
+        onPath = true;
     }
     
     public void setItems(){

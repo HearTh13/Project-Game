@@ -1,5 +1,6 @@
 package main;
 
+import ai.PathFinder;
 import event.Event;
 import inputs.KeyboardInputs;
 import entity.*;
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel implements Runnable{
     public AssetSetter asset = new AssetSetter(this);
     public UI ui = new UI(this);
     public Event event = new Event(this);
+    public PathFinder path = new PathFinder(this);
     Thread gameThread;
     
     //Entity and Object
